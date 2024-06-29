@@ -1,0 +1,22 @@
+<!-- app/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page with PostgreSQL</title>
+    <link rel="stylesheet" type="text/css" href="ecommerce/store/static/style.css">
+</head>
+<body>
+    <h1>Records from PostgreSQL Database</h1>
+    <ul>
+        {% for record in records %}
+            <li>{{ record.name }}</li>  {# Adjust to match your record fields #}
+        {% endfor %}
+    </ul>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter a name">
+        <input type="submit" value="Add Record">
+        <p>CSRF Token: {{ csrf_token }}</p>  <!-- Debugging output -->
+    </form>
+</body>
+</html>
