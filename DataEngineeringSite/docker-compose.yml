@@ -1,0 +1,39 @@
+services:
+  web:
+    links:
+      - db
+    image: DOCKER|jlmycontainerregistry.azurecr.io/data-engineering-site:v1
+    #container_name: dataengineeringsite-db-1
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: jlwarehousedb
+      DATABASE_USER: myuser
+      DATABASE_PASSWORD: myPa33word
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: warehouse_db
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pg_data:
+    driver: local

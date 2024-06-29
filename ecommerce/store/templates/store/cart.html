@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+</head>
+<body>
+    <h1>Cart</h1>
+    <div>
+        {% for item in items %}
+            <div>
+                <h2>{{ item.product.name }}</h2>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Price: {{ item.product.price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <p>Total: {{ order.get_cart_total }}</p>
+    <p>Items: {{ order.get_cart_items }}</p>
+</body>
+</html>
